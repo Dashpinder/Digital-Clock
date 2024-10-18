@@ -1,34 +1,22 @@
-// script.js
-let slideIndex = 0;
-const slides = document.querySelector('.slides');
-const totalSlides = document.querySelectorAll('.slides img').length;
 
-// Show initial slide
-showSlide(slideIndex);
+function updateTimer() {
+  let clockTimer= document.getElementById("clockTimer");
 
-// Function to show slides
-function showSlide(index) {
-  if (index >= totalSlides) {
-    slideIndex = 0;  // Wrap around to first slide
-  } else if (index < 0) {
-    slideIndex = totalSlides - 1;  // Wrap around to last slide
-  }
-  slides.style.transform = `translateX(${-slideIndex * 100}%)`;
+  let today= new Date();
+
+  let hours = today.getHours();
+  let minutes= today.getMinutes();
+  let seconds= today.getSeconds();
+
+hours = hours < 10 ? "0"+ hours : hours;
+minutes= minutes < 10 ? "0"+ minutes : minutes;
+seconds= seconds < 10 ? "0"+ seconds : seconds; 
+
+
+clockTimer.innerHTML= `${hours} : ${minutes} : ${seconds}`;
+
+
 }
+setInterval(updateTimer, 1000);
 
-// Next slide
-function nextSlide() {
-  slideIndex++;
-  showSlide(slideIndex);
-}
 
-// Previous slide
-function prevSlide() {
-  slideIndex--;
-  showSlide(slideIndex);
-}
-
-// Auto-slide every 3 seconds
-setInterval(() => {
-  nextSlide();
-}, 3000);
